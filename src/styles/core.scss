@@ -1,0 +1,33 @@
+@use './base.scss' as *;
+:root {
+  font-family: Poppins, Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --min-height: calc(100vh - 7.5rem);
+  --min-height-sm: calc(100vh - 3.6rem);
+  @include apply-at-md-size {
+    font-size: 120%;
+  }
+  @include apply-at-lg-size {
+    font-size: 125%;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg-secondary);
+  color: var(--color-text);
+}
+
+html {
+  @include light-theme;
+}

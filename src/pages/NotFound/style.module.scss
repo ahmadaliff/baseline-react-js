@@ -1,0 +1,41 @@
+@use '../../styles/base' as *;
+
+.contentWrapper {
+  @include directionY;
+  padding: 1rem;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: var(--min-height);
+  @include apply-at-md-size {
+    min-height: var(--min-height-sm);
+  }
+  .title {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .desc {
+    margin: 0;
+    max-width: 20rem;
+    text-align: center;
+    font-size: medium;
+  }
+  .backButton {
+    background-color: var(--color-primary);
+    text-transform: capitalize;
+    color: var(--color-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 2rem;
+    border: none;
+    &:hover {
+      transform: scale(1.05, 1.05);
+      transition: 500ms;
+    }
+  }
+}
