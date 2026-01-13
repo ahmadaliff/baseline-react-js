@@ -1,14 +1,13 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-// import { setLoading } from '@containers/App/actions';
-import { apiGetMerchants } from '@domain/api';
-import { GET_DATA } from './constants';
-import { actionSetData } from './actions';
+// import { apiGetMerchants } from '@domain/api';
+import { getData, setData } from './slice';
 
 function* sagaGetData() {
   // yield put(setLoading(true));
   try {
-    const response = yield call(apiGetMerchants, null);
-    yield put(actionSetData(response.data));
+    // const response = yield call(apiGetMerchants, null);
+    // yield put(setData(response.data));
+    yield put(setData([]));
   } catch (error) {
     console.log(error);
   }
@@ -16,5 +15,5 @@ function* sagaGetData() {
 }
 
 export default function* homeSaga() {
-  yield takeLatest(GET_DATA, sagaGetData);
+  yield takeLatest(getData.type, sagaGetData);
 }

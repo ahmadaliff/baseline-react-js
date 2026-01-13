@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import NoData from '@components/NoData';
 
 import { selectData } from '@pages/Home/selectors';
-import { actionGetData, actionResetData } from '@pages/Home/actions';
 
 import classes from '@pages/Home/style.module.scss';
+import { getData, resetData } from './slice';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -15,13 +15,11 @@ const Home = () => {
   const dataApi = useSelector(selectData);
 
   useEffect(() => {
-    if (dataApi.length === 0) dispatch(actionGetData());
+    if (dataApi.length === 0) dispatch(getData());
     return () => {
-      if (dataApi) {
-        dispatch(actionResetData());
-      }
+      dispatch(resetData());
     };
-  }, [dispatch, dataApi]);
+  }, [dispatch]);
 
   const filteredData = useMemo(() => {
     if (!dataApi.length) return [];
@@ -47,8 +45,8 @@ const Home = () => {
         </div>
       </header>
       <div className={classes.content}>
-        {filteredData.map((val, key) => (
-          <></>
+        {filteredData.map((val) => (
+          <>{val.name}</>
         ))}
       </div>
       {filteredData?.length === 0 && <NoData />}

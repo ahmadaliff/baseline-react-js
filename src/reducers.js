@@ -1,33 +1,21 @@
-import { combineReducers } from 'redux';
 
-import homeReducer, { storedKey as storedhomeState } from '@pages/Home/reducer';
-import storage from 'redux-persist/lib/storage';
+import languageReducer from '@containers/Language/slice';
+
 import { mapWithPersistor } from './persistence';
+import { combineReducers } from '@reduxjs/toolkit';
 
-import languageReducer from '@containers/Language/reducer';
-import { persistReducer } from 'redux-persist';
-
+import homeReducer, { storedKey as storedhomeState } from '@pages/Home/slice';
 const storedReducers = {
   home: { reducer: homeReducer, whitelist: storedhomeState },
-};
-
-const rootPeristConfig = {
-  key: 'root',
-  storage,
-  whitelist: Object.keys(storedReducers),
 };
 
 const temporaryReducers = {
   language: languageReducer,
 };
 
-const createReducer = () => {
-  const coreReducer = combineReducers({
-    ...mapWithPersistor(storedReducers),
-    ...temporaryReducers,
-  });
-  const rootReducer = (state, action) => coreReducer(state, action);
-  return rootReducer;
-};
+const rootReducer = combineReducers({
+  ...mapWithPersistor(storedReducers),
+  ...temporaryReducers,
+});
 
-export default persistReducer(rootPeristConfig, createReducer());
+export default rootReducer;

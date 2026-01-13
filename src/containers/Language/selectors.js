@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelector } from "@reduxjs/toolkit";
 
 const selectLanguage = (state) => state.language;
 
